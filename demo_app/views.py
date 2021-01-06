@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
-from .models import Blog
-from .forms import BlogForm
+from .models import Blog, User
+from .forms import BlogForm, RegistrationForm
 
 
 def index(req):
@@ -56,3 +56,16 @@ def new(req):
     else:
         form = BlogForm()
         return render(req, 'new.html', {'form': form})
+
+def registration(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = User.objects.create_user(username=username, password=password)
+            user.save()
+            return redirect('demo_app:index')
+    else:
+        form = RegistrationForm()
+    return render(request, 'register.html', {'form': form})
