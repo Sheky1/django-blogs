@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'vezbe11.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'automobili',
+        'NAME': 'blogs',
         'HOST': 'localhost',
         'PORT': '3306',
         'USER': 'root',
@@ -86,7 +86,7 @@ DATABASES = {
     }
 }
 
-LOGIN_REDIRECT_URL = '/articles'
+LOGIN_REDIRECT_URL = '/blogs'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
