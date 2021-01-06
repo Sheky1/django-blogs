@@ -1,0 +1,29 @@
+{% extends 'master.html' %}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-header">
+            <h1>
+                {{ blog.title }}
+                {% if perms.demo_app.change_blog %}
+                    <a href="{% url 'demo_app:edit' blog.id %}">
+                        <span class="badge badge-primary">Edit</span>
+                    </a>
+                {% endif %}
+            </h1>
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>{{ blog.content }}</p>
+                <footer class="blockquote-footer">
+                    Author:
+                    <cite title="Source Title">
+                        {{ blog.owner.username }}
+                    </cite>
+                </footer>
+            </blockquote>
+        </div>
+    </div>
+
+{% endblock %}
