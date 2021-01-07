@@ -41,6 +41,13 @@ def edit(req, id):
         form = BlogForm(instance=a)
         return render(req, 'edit.html', {'form': form, 'id': id})
 
+@permission_required('blogs.delete_blog')
+def delete(request, id):
+    temp = Blog.objects.get(pk=id)
+    temp.delete()
+    return redirect('demo_app:blogs')
+
+
 
 @permission_required('demo_app.add_blog')
 def new(req):

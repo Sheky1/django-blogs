@@ -10,11 +10,15 @@
                     <a href="{% url 'demo_app:edit' blog.id %}">
                         <span class="badge badge-primary">Edit</span>
                     </a>
+                    <a href="{% url 'demo_app:delete' blog.id %}">
+                        <span class="badge badge-primary">delete</span>
+                    </a>
                 {% endif %}
             </h1>
         </div>
         <div class="card-body">
             <blockquote class="blockquote mb-0">
+                <p>Kategorija: {{ blog.category }}</p>
                 <p>{{ blog.content }}</p>
                 <footer class="blockquote-footer">
                     Author:
