@@ -31,6 +31,7 @@ def edit(req, id):
         if form.is_valid():
             a = Blog.objects.get(id=id)
             a.title = form.cleaned_data['title']
+            a.category = form.cleaned_data['category']
             a.content = form.cleaned_data['content']
             a.save()
             return redirect('demo_app:blogs')
@@ -55,7 +56,7 @@ def new(req):
         form = BlogForm(req.POST)
 
         if form.is_valid():
-            a = Blog(title=form.cleaned_data['title'], content=form.cleaned_data['content'], owner=req.user)
+            a = Blog(title=form.cleaned_data['title'], category=form.cleaned_data['category'], content=form.cleaned_data['content'], owner=req.user)
             a.save()
             return redirect('demo_app:blogs')
         else:
