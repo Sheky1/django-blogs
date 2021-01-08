@@ -1,0 +1,20 @@
+{% extends 'master.html' %}
+
+{% block title %}
+    New comment
+{% endblock %}
+
+{% block content %}
+
+    <form method="post" action="{% url 'demo_app:newRating' id %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.value.id_for_label }}">{{ form.value.label_tag }}</label>
+            <p></p>
+            {{form.value}}
+        </div>
+
+        <input type="submit" class="btn btn-secondary" value="Add"/>
+    </form>
+
+{% endblock %}

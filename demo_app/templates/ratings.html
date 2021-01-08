@@ -1,0 +1,16 @@
+{%  extends 'master.html' %}
+
+{% block title %}
+    Ratings
+{% endblock %}
+
+{%  block content %}
+    <div class="list-group">
+        {% for rating in ratings %}
+            <a class="list-group-item list-group-item-action">
+                {{ rating.value }}
+            </a>
+        {% endfor %}
+    </div>
+
+{% endblock %}

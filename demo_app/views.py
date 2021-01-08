@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
-from .models import Blog, User
-from .forms import BlogForm, RegistrationForm
+from .models import Blog, User, Rating
+from .forms import BlogForm, RegistrationForm, RatingForm
 
 
 def index(req):
@@ -48,8 +48,6 @@ def delete(request, id):
     temp.delete()
     return redirect('demo_app:blogs')
 
-
-
 @permission_required('demo_app.add_blog')
 def new(req):
     if req.method == 'POST':
@@ -64,6 +62,29 @@ def new(req):
     else:
         form = BlogForm()
         return render(req, 'new.html', {'form': form})
+
+@login_required
+def newRating(req, id):
+    if req.method == 'POST':
+        form = RatingForm(req.POST)
+
+        if form.is_valid():
+            a = Blog.objects.get(id=id)
+            c = Rating(value=form.cleaned_data['value'], blog=a)
+            c.save()
+            return redirect('demo_app:blogs')
+        else:
+            return redirect('demo_app:blogs')
+    else:
+        c = Rating(value="")
+        form = RatingForm(instance=c)
+        return render(req, 'newRating.html', {'form': form, 'id': id})
+
+@login_required
+def ratings(req, id):
+    tmp = Rating.objects.filter(blog_id=id)
+    return render(req, 'ratings.html', {'ratings': tmp})
+
 
 def registration(request):
     if request.method == 'POST':

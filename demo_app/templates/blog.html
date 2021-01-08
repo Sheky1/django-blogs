@@ -13,7 +13,14 @@
                     <a href="{% url 'demo_app:delete' blog.id %}">
                         <span class="badge badge-primary">delete</span>
                     </a>
+            
                 {% endif %}
+                <a href="{% url 'demo_app:newRating' blog.id %}">
+                    <span >Add rating</span>
+                </a>
+                <a href="{% url 'demo_app:ratings' blog.id %}">
+                  <span >All ratings</span>
+                </a>
             </h1>
         </div>
         <div class="card-body">
